@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WanSwap</title>
+	<link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/cyborg/bulmaswatch.min.css">
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<link href="css/all.min.css" rel="stylesheet">
+	<!--load all fontawesome pack styles -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!--<link href="css/wanswap.css" rel="stylesheet">-->
+	<!--Wanswap Style Sheet-->
+	<style>
+		html {
+			height: 100%;
+			background: #0f2454 url(bg.jpg) no-repeat center bottom fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+
+		.navbar {
+			border-bottom: 2px solid #efefef;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+		.navbar-item img {
+			max-height: 48px;
+		}
+
+		.navbar-item {
+			font-size: 18px;
+			transition: transform .3s ease-out;
+			/* Animation */
+		}
+
+		.navbar-item.is-active {
+			color: #fff !important;
+			font-weight: bold;
+
+
+		}
+
+		.navbar-item:hover {
+			transform: scale(1.2);
+			position: relative;
+
+		}
+
+		.navbar.is-transparent {
+			background: rgba(1, 1, 1, 0.2);
+		}
+
+		.exchange-panel {
+			margin-top: 10px;
+
+		}
+
+		.exchange-panel .column {
+			padding: 15px;
+			border-radius: 5px;
+			max-width: 600px;
+			background: rgba(100, 100, 100, 0.2);
+		}
+
+
+		.exchange-panel .estimate-panel .column {
+			max-width: auto;
+			background: transparent;
+
+		}
+
+		#estimated_area {
+
+			max-height: 0;
+			padding: 0;
+			transform-origin: top;
+			transition: all 0.3s linear;
+		}
+
+		#estimated_area .table {
+			transition: all 0.3s linear;
+			opacity: 0;
+			word-wrap: none;
+			word-break: keep-all;
+		}
+
+
+		#estimated_area.opened {
+			padding: 10px 20px;
+			max-height: 300px;
+
+		}
+
+		#estimated_area.opened .table {
+			display: table;
+			opacity: 1;
+		}
+
+
+		.exchange-panel .input {
+			border: 0;
+			font-weight: bold;
+		}
+
+		.exchange-panel .is-full-width {
+			width: 100%;
+		}
+
+		.exchange-panel .field {
+			margin-bottom: 10px;
+
+		}
+
+		.exchange-panel .from-panel,
+		.exchange-panel .to-panel,
+		.exchange-panel .estimate-panel {
+			margin-bottom: 10px;
+			padding: 15px 20px;
+			background-color: rgba(100, 100, 100, 0.2);
+			border-radius: 5px;
+		}
+
+		.exchange-panel .to-panel {
+			margin-top: -30px;
+
+		}
+
+		.exchange-panel .submit-panel {
+			margin-top: 20px;
+			padding-left: 2px;
+			padding-right: 2px;
+			background-color: transparent;
+		}
+
+		.exchange-panel .switch-panel {
+
+			font-size: 20px;
+			font-weight: bold;
+			text-align: center;
+			position: relative;
+			top: -20px;
+		}
+
+		.exchange-panel .table {
+			background: transparent;
+			font-size: 13px;
+		}
+
+		.button {
+			transition: all .2s ease-in;
+			/* Animation */
+		}
+
+		.switch-panel .button {
+			background: transparent;
+			border: 2px solid #efefef;
+			color: white;
+
+			border-radius: 50%;
+			height: 30px;
+			width: 30px;
+			font-size: 13px;
+			font-weight: bold;
+		}
+
+		#centered_logo {
+			transition: all 0.3s ease-out;
+			max-height: 80px;
+			margin-bottom: 40px;
+		}
+
+		#centered_logo.shrinked {
+			max-height: 40px;
+			margin-bottom: 20px;
+			margin-top: -20px;
+			transform: scale(1);
+		}
+
+
+		.modal .delete {
+			width: 30px;
+			min-height: 30px;
+			min-width: 30px;
+			max-width: 30px;
+			max-height: 30px;
+		}
+
+		.modal-card-head {
+			background-color: #242424;
+			text-align: center;
+		}
+
+		#select_token_modal .panel-icon {
+			font-size: 36px;
+		}
+
+		#select_token_modal .media {
+			padding: 10px;
+			background: #fff;
+			border-radius: 5px;
+			color: rgba(0, 0, 0, .7);
+			opacity: 0.8;
+			transition: all 0.3s;
+		}
+
+		#select_token_modal .media:hover {
+			opacity: 1;
+		}
+		#select_token_modal .media .content p
+		{
+			line-height: 23px;
+		}
+		#select_token_modal .media .content strong
+		{
+			font-size:18px;
+		}
+		#select_token_modal .media .content span
+		{
+			font-size:13px;
+		}
+
+
+		@media only screen and (max-width: 769px) {
+			.exchange-panel .column {
+				padding: 10px;
+			}
+
+			.exchange-panel .from-panel,
+			.exchange-panel .to-panel,
+			.exchange-panel .estimate-panel {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			.columns {
+				margin-left: -1rem;
+				margin-right: -1rem;
+
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+
+		<div class="container">
+
+			<div class="navbar-brand is-hidden-desktop">
+
+				<a class="navbar-item" href="https://www.wanswap.finance">
+					<img src="logo.png">
+				</a>
+
+
+				<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+					data-target="navbarBasicExample">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+
+
+			<div id="navbarBasicExample" class="navbar-menu">
+
+
+				<div class="navbar-start">
+					<a class="navbar-item is-active">
+						<i class="fas fa-sync-alt" style="padding-right:10px;"></i> SWAP
+					</a>
+
+					<a class="navbar-item">
+						<i class="fas fa-water" style="padding-right:10px;"></i> POOL
+					</a>
+
+					<a class="navbar-item">
+						<i class="fas fa-chart-line" style="padding-right:10px;"></i> CHART
+					</a>
+
+
+				</div>
+
+				<div class="navbar-end">
+					<div class="navbar-item">
+						<div class="buttons">
+							<a class="button is-light">
+								<strong><i class="fas fa-wallet" style="padding-right:10px;"></i> Unlock Wallet</strong>
+							</a>
+
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+
+
+		</div>
+	</nav>
+
+	<div class="section exchange-panel">
+		<div class="is-hidden-mobile is-centered columns ">
+			<img id="centered_logo" src="logo.png">
+		</div>
+
+
+		<div class="columns is-flex-touch	 is-flex-tablet is-desktop is-centered">
+
+			<div class="column is-half">
+
+				<div class="from-panel">
+					<label class="label is-pulled-left">From</label>
+					<span class="tag is-pulled-right">Balance: 0.567</span>
+					<div class="is-clearfix"></div>
+					<div class="field has-addons">
+
+
+						<div class="control is-full-width">
+							<input class="input is-medium" type="text" placeholder="0.0" value="1">
+						</div>
+						<div class="control">
+							<a class="button is-medium is-light">
+								<img style="max-width:28px;"
+									src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png">
+								<span style="padding-left:10px;">wanBTC</span> <span style="padding-left:10px;"></i><i
+										class="fas fa-angle-down"></i></span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="switch-panel">
+					<a class="button is-light">
+						<i class="fas fa-angle-up"></i><i class="fas fa-angle-down"></i>
+					</a>
+				</div>
+
+
+				<div class="to-panel">
+					<label class="label is-pulled-left">To (estimated)</label>
+					<span class="tag  is-pulled-right">Balance: 654.215</span>
+					<div class="is-clearfix"></div>
+					<div class="field has-addons">
+
+						<div class="control is-full-width">
+							<input class="input is-medium" type="text" placeholder="0.0" value="35416.25154654">
+						</div>
+						<div class="control">
+							<a class="button is-medium is-light" onclick="popup_select_token_modal()">
+								Select Token <span style="padding-left:10px;"></i><i
+										class="fas fa-angle-down"></i></span>
+							</a>
+						</div>
+					</div>
+					<label class="label is-pulled-left">Price</label>
+					<span class="is-pulled-right">0.0031397 wanBTC/wanWAN <span
+							class="fas fa-exchange-alt"></span></span>
+					<div class="is-clearfix"></div>
+				</div>
+
+				<div id="estimated_area" class="estimate-panel">
+					<table class="table is-narrow is-fullwidth is-hoverable">
+						<tr>
+							<td>Min. received</td>
+							<td class="has-text-right">35400.13 wanWAN</td>
+						</tr>
+						<tr>
+							<td>Price Impact</td>
+							<td class="has-text-right has-text-danger">5.87%</td>
+						</tr>
+						<tr>
+							<td>Fee</td>
+							<td class="has-text-right">0.01 wanWAN</td>
+						</tr>
+					</table>
+
+				</div>
+
+				<div class="submit-panel">
+					<div class="control is-full-width">
+						<a class="button is-large is-dark is-link  is-fullwidth">
+							<i class="fas fa-wallet"></i> <span style="padding-left:10px;"></span>Unlock Wallet</span>
+						</a>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div id="select_token_modal" class="modal animate__fadeIn">
+		<div class="modal-background" onclick="javascript:close_select_token_modal()"></div>
+		<div class="modal-card">
+			<header class="modal-card-head" style="padding-bottom:0px;">
+				<p class="modal-card-title">Select Token</p>
+				<button class="delete" aria-label="close" onclick="javascript:close_select_token_modal()"></button>
+			</header>
+			<section class="modal-card-body">
+				<div class="field">
+					<div class="control has-icons-left">
+						<input class="input is-medium" type="email" placeholder="Search token name, symbol or address">
+						<span class="icon is-small is-left">
+							<i class="fas fa-search"></i>
+						</span>
+
+					</div>
+				</div>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanBTC</strong>
+								<br>
+								<span>Wanchain wrapped Bitcoin</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">0.5346 wanBTC</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanEOS</strong>
+								<br>
+								<span>Wanchain wrapped EOS</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">562.03 wanEOS</span>
+					</div>
+				</a>
+				
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanWAN</strong>
+								<br>
+								<span>Wanchain on Ethereum</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">56,854.379 wanDOT</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanDOT</strong>
+								<br>
+								<span>Wanchain wrapped Polkadot</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">1,252.538379 wanDOT</span>
+					</div>
+				</a>
+				
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanBTC</strong>
+								<br>
+								<span>Wanchain wrapped Bitcoin</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">0.5346 wanBTC</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanEOS</strong>
+								<br>
+								<span>Wanchain wrapped EOS</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">562.03 wanEOS</span>
+					</div>
+				</a>
+				
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanWAN</strong>
+								<br>
+								<span>Wanchain on Ethereum</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">56,854.379 wanDOT</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanDOT</strong>
+								<br>
+								<span>Wanchain wrapped Polkadot</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">1,252.538379 wanDOT</span>
+					</div>
+				</a>
+				
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanBTC</strong>
+								<br>
+								<span>Wanchain wrapped Bitcoin</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">0.5346 wanBTC</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanEOS</strong>
+								<br>
+								<span>Wanchain wrapped EOS</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">562.03 wanEOS</span>
+					</div>
+				</a>
+				
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanWAN</strong>
+								<br>
+								<span>Wanchain on Ethereum</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">56,854.379 wanDOT</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanDOT</strong>
+								<br>
+								<span>Wanchain wrapped Polkadot</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">1,252.538379 wanDOT</span>
+					</div>
+				</a>
+				
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanBTC</strong>
+								<br>
+								<span>Wanchain wrapped Bitcoin</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">0.5346 wanBTC</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanEOS</strong>
+								<br>
+								<span>Wanchain wrapped EOS</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">562.03 wanEOS</span>
+					</div>
+				</a>
+				
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanWAN</strong>
+								<br>
+								<span>Wanchain on Ethereum</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">56,854.379 wanDOT</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanDOT</strong>
+								<br>
+								<span>Wanchain wrapped Polkadot</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">1,252.538379 wanDOT</span>
+					</div>
+				</a>
+				
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanBTC</strong>
+								<br>
+								<span>Wanchain wrapped Bitcoin</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">0.5346 wanBTC</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanEOS</strong>
+								<br>
+								<span>Wanchain wrapped EOS</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">562.03 wanEOS</span>
+					</div>
+				</a>
+				
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanWAN</strong>
+								<br>
+								<span>Wanchain on Ethereum</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">56,854.379 wanDOT</span>
+					</div>
+				</a>
+
+				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
+					<figure class="media-left">
+						<p class="image is-48x48">
+							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
+						</p>
+					</figure>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>wanDOT</strong>
+								<br>
+								<span>Wanchain wrapped Polkadot</span>
+							</p>
+						</div>
+					</div>
+					<div class="media-right">
+						<span class="tag">1,252.538379 wanDOT</span>
+					</div>
+				</a>
+
+			</section>
+
+		</div>
+	</div>
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// Get all "navbar-burger" elements
+			const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+			// Check if there are any navbar burgers
+			if ($navbarBurgers.length > 0) {
+
+				// Add a click event on each of them
+				$navbarBurgers.forEach(el => {
+					el.addEventListener('click', () => {
+
+						// Get the target from the "data-target" attribute
+						const target = el.dataset.target;
+						const $target = document.getElementById(target);
+
+						// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+						el.classList.toggle('is-active');
+						$target.classList.toggle('is-active');
+
+					});
+				});
+			}
+		});
+
+		function popup_select_token_modal() {
+			$('#select_token_modal').hide().addClass('is-active').fadeIn('fast');
+			document.getElementById('estimated_area').classList.remove('opened');
+				document.getElementById('centered_logo').classList.remove('shrinked');
+		}
+
+		function close_select_token_modal() {
+			$('#select_token_modal').fadeOut('fast');
+		}
+
+
+		
+		function show_estimated_area() {
+			
+				document.getElementById('estimated_area').classList.add('opened');
+				document.getElementById('centered_logo').classList.add('shrinked');
+			
+		}
+	</script>
+
+</body>
+
+</html>
