@@ -211,18 +211,57 @@
 		#select_token_modal .media:hover {
 			opacity: 1;
 		}
-		#select_token_modal .media .content p
-		{
+
+		#select_token_modal .media .content p {
 			line-height: 23px;
 		}
-		#select_token_modal .media .content strong
-		{
-			font-size:18px;
+
+		#select_token_modal .media .content strong {
+			font-size: 18px;
 		}
-		#select_token_modal .media .content span
-		{
-			font-size:13px;
+
+		#select_token_modal .media .content span {
+			font-size: 13px;
 		}
+
+		#advanced_setting {
+
+			margin-top: 5px;
+			padding: 15px 20px;
+
+		}
+
+		#advanced_setting .label {
+			font-weight: normal;
+
+		}
+
+		#advanced_setting .label {
+			font-weight: normal;
+			text-align:center;
+		}
+
+		#advanced_setting .is-static {
+			font-weight: normal;
+			color: #111;
+			border-color: #f5f5f5;
+
+		}
+
+		
+
+		#advanced_setting .columns
+		{
+			display: flex !important;
+			margin-left:-1rem;
+			margin-right:-1rem;
+		}
+
+		
+
+		
+
+
 
 
 		@media only screen and (max-width: 769px) {
@@ -242,6 +281,7 @@
 				margin-right: -1rem;
 
 			}
+
 		}
 	</style>
 </head>
@@ -293,12 +333,9 @@
 							<a class="button is-light">
 								<strong><i class="fas fa-wallet" style="padding-right:10px;"></i> Unlock Wallet</strong>
 							</a>
-
 						</div>
 					</div>
 				</div>
-
-
 
 
 			</div>
@@ -391,6 +428,41 @@
 							<i class="fas fa-wallet"></i> <span style="padding-left:10px;"></span>Unlock Wallet</span>
 						</a>
 					</div>
+
+					<a onclick="javascript:show_setting()" class="is-pulled-right" style="margin-top:5px;font-size:13px;">
+						Transaction Setting <span class="fas fa-angle-down"></span>
+					</a>
+					<div class="is-clearfix"></div>
+				</div>
+
+				<div id="advanced_setting" style="display:none">
+					<div class="columns">
+						<div class="column">
+							<label class="label" style="font-size:13px;">Limit Slippage</label>
+							<div class="field">
+								<div class="control has-icons-right">
+									<input class="input is-small" type="text" placeholder="0.0" value="0.5">
+									<span class="icon is-small is-right">
+										<i class="fas fa-percent fa-xs"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="column">
+							<label class="label" style="font-size:13px;">Transaction Expiry</label>
+							<div class="field has-addons">
+								<p class="control">
+									<input class="input is-small" type="text" placeholder="20" value="20">
+								</p>
+								<p class="control">
+									<a class="button is-static is-small">
+										Minutes
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+
 				</div>
 
 
@@ -455,7 +527,7 @@
 						<span class="tag">562.03 wanEOS</span>
 					</div>
 				</a>
-				
+
 
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
@@ -496,7 +568,7 @@
 						<span class="tag">1,252.538379 wanDOT</span>
 					</div>
 				</a>
-				
+
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
 						<p class="image is-48x48">
@@ -536,7 +608,7 @@
 						<span class="tag">562.03 wanEOS</span>
 					</div>
 				</a>
-				
+
 
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
@@ -577,7 +649,7 @@
 						<span class="tag">1,252.538379 wanDOT</span>
 					</div>
 				</a>
-				
+
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
 						<p class="image is-48x48">
@@ -617,7 +689,7 @@
 						<span class="tag">562.03 wanEOS</span>
 					</div>
 				</a>
-				
+
 
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
@@ -658,7 +730,7 @@
 						<span class="tag">1,252.538379 wanDOT</span>
 					</div>
 				</a>
-				
+
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
 						<p class="image is-48x48">
@@ -698,7 +770,7 @@
 						<span class="tag">562.03 wanEOS</span>
 					</div>
 				</a>
-				
+
 
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
@@ -739,7 +811,7 @@
 						<span class="tag">1,252.538379 wanDOT</span>
 					</div>
 				</a>
-				
+
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
 						<p class="image is-48x48">
@@ -779,7 +851,7 @@
 						<span class="tag">562.03 wanEOS</span>
 					</div>
 				</a>
-				
+
 
 				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
 					<figure class="media-left">
@@ -855,20 +927,25 @@
 		function popup_select_token_modal() {
 			$('#select_token_modal').hide().addClass('is-active').fadeIn('fast');
 			document.getElementById('estimated_area').classList.remove('opened');
-				document.getElementById('centered_logo').classList.remove('shrinked');
+			document.getElementById('centered_logo').classList.remove('shrinked');
 		}
 
 		function close_select_token_modal() {
 			$('#select_token_modal').fadeOut('fast');
 		}
 
+		function show_setting()
+		{
+			$('#advanced_setting').hide().slideDown('fast');
+		}
 
-		
+
+
 		function show_estimated_area() {
-			
-				document.getElementById('estimated_area').classList.add('opened');
-				document.getElementById('centered_logo').classList.add('shrinked');
-			
+
+			document.getElementById('estimated_area').classList.add('opened');
+			document.getElementById('centered_logo').classList.add('shrinked');
+
 		}
 	</script>
 
