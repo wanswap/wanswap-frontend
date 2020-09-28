@@ -5,13 +5,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>WanSwap</title>
-	<link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/cyborg/bulmaswatch.min.css">
+	<link rel="stylesheet" href="css/bulmaswatch.min.css">
 	<link rel="icon" type="image/png" href="favicon.png" />
 	<link href="css/all.min.css" rel="stylesheet">
 	<!--load all fontawesome pack styles -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="css/jquery.min.js"></script>
 	<!--<link href="css/wanswap.css" rel="stylesheet">-->
 	<!--Wanswap Style Sheet-->
+	<link href="css/fonts.css" rel="stylesheet">
 	<style>
 		html {
 			height: 100%;
@@ -20,6 +21,12 @@
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
+			
+		}
+
+		body, button, input, select, textarea
+		{
+			font-family: 'Roboto', sans-serif !important;
 		}
 
 		.navbar {
@@ -238,7 +245,7 @@
 
 		#advanced_setting .label {
 			font-weight: normal;
-			text-align:center;
+			text-align: center;
 		}
 
 		#advanced_setting .is-static {
@@ -248,18 +255,17 @@
 
 		}
 
-		
 
-		#advanced_setting .columns
-		{
+
+		#advanced_setting .columns {
 			display: flex !important;
-			margin-left:-1rem;
-			margin-right:-1rem;
+			margin-left: -1rem;
+			margin-right: -1rem;
 		}
 
-		
 
-		
+
+
 
 
 
@@ -429,7 +435,8 @@
 						</a>
 					</div>
 
-					<a onclick="javascript:show_setting()" class="is-pulled-right" style="margin-top:5px;font-size:13px;">
+					<a id="advanced_setting_btn" onclick="javascript:show_setting()" class="is-pulled-right"
+						style="margin-top:5px;font-size:13px;">
 						Transaction Setting <span class="fas fa-angle-down"></span>
 					</a>
 					<div class="is-clearfix"></div>
@@ -934,9 +941,15 @@
 			$('#select_token_modal').fadeOut('fast');
 		}
 
-		function show_setting()
-		{
-			$('#advanced_setting').hide().slideDown('fast');
+		function show_setting() {
+			if ($('#advanced_setting_btn span').hasClass('fa-angle-down')) {
+				$('#advanced_setting_btn span').addClass('fa-angle-up').removeClass('fa-angle-down');
+				$('#advanced_setting').hide().slideDown('fast');
+			}
+			else{
+				$('#advanced_setting_btn span').addClass('fa-angle-down').removeClass('fa-angle-up');
+				$('#advanced_setting').slideUp('fast');
+			}
 		}
 
 
