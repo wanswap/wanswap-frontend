@@ -16,7 +16,7 @@
 	<style>
 		html {
 			height: 100%;
-			background: #0f2454 url(bg.jpg) no-repeat center bottom fixed;
+			background: #002868;// url(bg.jpg) no-repeat center bottom fixed;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
@@ -30,7 +30,7 @@
 		}
 
 		.navbar {
-			border-bottom: 2px solid #efefef;
+			border-bottom: 0;
 			padding-top: 10px;
 			padding-bottom: 10px;
 		}
@@ -178,7 +178,7 @@
 
 		#centered_logo {
 			transition: all 0.3s ease-out;
-			max-height: 80px;
+			max-height: 100px;
 			margin-bottom: 40px;
 		}
 
@@ -187,6 +187,11 @@
 			margin-bottom: 20px;
 			margin-top: -20px;
 			transform: scale(1);
+		}
+
+		#advanced_setting_btn
+		{
+			color:white;
 		}
 
 
@@ -201,6 +206,12 @@
 		.modal-card-head {
 			background-color: #242424;
 			text-align: center;
+			background:#002053;
+		}
+
+		.modal-card-body
+		{
+			background-color: #002868;
 		}
 
 		#select_token_modal .panel-icon {
@@ -270,6 +281,11 @@
 		#advanced_setting .column
 		{
 			background:transparent;
+		}
+
+		.content table td, .content table th, .table td, .table th
+		{
+			border-color:#efefef;
 		}
 
 
@@ -368,7 +384,7 @@
 
 	<div class="section exchange-panel">
 		<div class="is-hidden-mobile is-centered columns ">
-			<img id="centered_logo" src="logo.png">
+			<img id="centered_logo" src="new_logo.png">
 		</div>
 
 
@@ -496,7 +512,7 @@
 	<div id="select_token_modal" class="modal animate__fadeIn">
 		<div class="modal-background" onclick="javascript:close_select_token_modal()"></div>
 		<div class="modal-card">
-			<header class="modal-card-head" style="padding-bottom:0px;">
+			<header class="modal-card-head"">
 				<p class="modal-card-title">Select Token</p>
 				<button class="delete" aria-label="close" onclick="javascript:close_select_token_modal()"></button>
 			</header>
@@ -592,329 +608,7 @@
 					</div>
 				</a>
 
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanBTC</strong>
-								<br>
-								<span>Wanchain wrapped Bitcoin</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">0.5346 wanBTC</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanEOS</strong>
-								<br>
-								<span>Wanchain wrapped EOS</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">562.03 wanEOS</span>
-					</div>
-				</a>
-
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanWAN</strong>
-								<br>
-								<span>Wanchain on Ethereum</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">56,854.379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanDOT</strong>
-								<br>
-								<span>Wanchain wrapped Polkadot</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">1,252.538379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanBTC</strong>
-								<br>
-								<span>Wanchain wrapped Bitcoin</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">0.5346 wanBTC</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanEOS</strong>
-								<br>
-								<span>Wanchain wrapped EOS</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">562.03 wanEOS</span>
-					</div>
-				</a>
-
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanWAN</strong>
-								<br>
-								<span>Wanchain on Ethereum</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">56,854.379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanDOT</strong>
-								<br>
-								<span>Wanchain wrapped Polkadot</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">1,252.538379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanBTC</strong>
-								<br>
-								<span>Wanchain wrapped Bitcoin</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">0.5346 wanBTC</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanEOS</strong>
-								<br>
-								<span>Wanchain wrapped EOS</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">562.03 wanEOS</span>
-					</div>
-				</a>
-
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanWAN</strong>
-								<br>
-								<span>Wanchain on Ethereum</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">56,854.379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanDOT</strong>
-								<br>
-								<span>Wanchain wrapped Polkadot</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">1,252.538379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanBTC</strong>
-								<br>
-								<span>Wanchain wrapped Bitcoin</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">0.5346 wanBTC</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanEOS</strong>
-								<br>
-								<span>Wanchain wrapped EOS</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">562.03 wanEOS</span>
-					</div>
-				</a>
-
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2606.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanWAN</strong>
-								<br>
-								<span>Wanchain on Ethereum</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">56,854.379 wanDOT</span>
-					</div>
-				</a>
-
-				<a class="media" onclick="javascript:close_select_token_modal();javascript:show_estimated_area()">
-					<figure class="media-left">
-						<p class="image is-48x48">
-							<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png">
-						</p>
-					</figure>
-					<div class="media-content">
-						<div class="content">
-							<p>
-								<strong>wanDOT</strong>
-								<br>
-								<span>Wanchain wrapped Polkadot</span>
-							</p>
-						</div>
-					</div>
-					<div class="media-right">
-						<span class="tag">1,252.538379 wanDOT</span>
-					</div>
-				</a>
+				
 
 			</section>
 
