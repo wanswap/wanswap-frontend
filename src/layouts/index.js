@@ -1,15 +1,33 @@
+import React, {useEffect, useState, useMemo} from 'react';
+
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'umi';
-import { Wallet, getSelectedAccount, getSelectedAccountWallet } from "wan-dex-sdk-wallet";
+import { Wallet, getSelectedAccount, getSelectedAccountWallet, WalletButton } from "wan-dex-sdk-wallet";
 import "wan-dex-sdk-wallet/index.css";
 import { withRouter } from 'umi';
 import { connect } from 'react-redux';
-
+import { getNodeUrl, isSwitchFinish, getFastWeb3 } from '../utils/web3switch.js';
 
 
 function BasicLayout(props) {
+  const [rpc, setRpc] = useState(undefined);
+
+  useEffect(() => {
+    const func = async () => {
+      await getFastWeb3();
+      setRpc(getNodeUrl());
+    }
+    func();
+  }, []);
+
   return (
     <Ground>
+      {
+        rpc
+        ? <Wallet title="WanSwap" nodeUrl={rpc} />
+        : null
+      }
+
       <TopBar>
         <Logo>
           <img src={require('../assets/new_logo.png')} width={160}/>
@@ -18,6 +36,11 @@ function BasicLayout(props) {
         <Tab to="/pool" select={props.location.pathname === '/pool'}>POOL</Tab>
         <Tab to="/farm" select={props.location.pathname === '/farm'}>FARM</Tab>
         <Tab to="/vote" select={props.location.pathname === '/vote'}>VOTE</Tab>
+        {
+          rpc
+          ? <WalletBt><WalletButton /></WalletBt>
+          : null
+        }
       </TopBar>
       {props.children}
     </Ground>
@@ -82,4 +105,25 @@ const Tab = styled(Link)`
   font-size: 22px;
   font-weight: ${props=>props.select?"bold":"normal"};
   color: ${props=>props.select?"#ffffffff":"#ffffffbb"};
+`;
+
+
+export const WalletBt = styled.div`
+  border: 1px solid white;
+  border-radius: 25px;
+  margin: 12px;
+  margin-left: auto;
+  margin-right: 20px;
+  padding: 2px;
+  button {
+    background: transparent;
+    border: none;
+    height: 30px;
+    /* width: 220px; */
+    font-family: Roboto Condensed;
+    font-size: 16px;
+    :hover {
+      background-color: transparent!important;
+    }
+  }
 `;
