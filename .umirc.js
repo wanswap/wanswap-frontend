@@ -3,5 +3,6 @@
 export default {
   antd: {},
   title: 'WanSwap',
+  favicon: '/new_logo.png',
 }
 
