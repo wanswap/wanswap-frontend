@@ -10,6 +10,7 @@
   "dependencies": {
     "@umijs/preset-react": "^1.6.13",
     "antd": "^4.7.2",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "umi": "^3.2.24"
