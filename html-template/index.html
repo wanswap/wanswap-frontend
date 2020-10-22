@@ -16,16 +16,29 @@
 	<style>
 		html {
 			height: 100%;
-			background: #002868;// url(bg.jpg) no-repeat center bottom fixed;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
+			background: url(img/hexagons.png), -moz-linear-gradient(45deg, rgba(16, 114, 189, 1) 0%, rgba(16, 114, 189, 1) 23%, rgba(2, 41, 97, 1) 48%, rgba(0, 4, 38, 1) 73%, rgba(0, 0, 21, 1) 100%);
+			background: url(img/hexagons.png),-webkit-linear-gradient(45deg, rgba(16, 114, 189, 1) 0%, rgba(16, 114, 189, 1) 23%, rgba(2, 41, 97, 1) 48%, rgba(0, 4, 38, 1) 73%, rgba(0, 0, 21, 1) 100%);
+			background: url(img/hexagons.png),-o-linear-gradient(45deg, rgba(16, 114, 189, 1) 0%, rgba(16, 114, 189, 1) 23%, rgba(2, 41, 97, 1) 48%, rgba(0, 4, 38, 1) 73%, rgba(0, 0, 21, 1) 100%);
+			background: url(img/hexagons.png),-ms-linear-gradient(45deg, rgba(16, 114, 189, 1) 0%, rgba(16, 114, 189, 1) 23%, rgba(2, 41, 97, 1) 48%, rgba(0, 4, 38, 1) 73%, rgba(0, 0, 21, 1) 100%);
+			background: url(img/hexagons.png),linear-gradient(45deg, rgba(16, 114, 189, 1) 0%, rgba(16, 114, 189, 1) 23%, rgba(2, 41, 97, 1) 48%, rgba(0, 4, 38, 1) 73%, rgba(0, 0, 21, 1) 100%);
 			
 		}
 
-		body, button, input, select, textarea
+		.shadow_bottom
 		{
+			background:url(img/shadow_bottom.png) repeat-x;
+			width:100%;
+			height:860px;
+			position:fixed;
+			bottom:0;
+			z-index:-1;
+		}
+
+		body,
+		button,
+		input,
+		select,
+		textarea {
 			font-family: 'Roboto', sans-serif !important;
 		}
 
@@ -33,6 +46,7 @@
 			border-bottom: 0;
 			padding-top: 10px;
 			padding-bottom: 10px;
+			background:transparent;
 		}
 
 		.navbar-item img {
@@ -43,7 +57,7 @@
 			font-size: 18px;
 			transition: transform .3s ease-out;
 			/* Animation */
-			border-radius:5px;
+			border-radius: 5px;
 		}
 
 		.navbar-item.is-active {
@@ -60,7 +74,7 @@
 		}
 
 		.navbar.is-transparent {
-			background: #002051;
+			/*background: #002051;*/
 		}
 
 		.exchange-panel {
@@ -72,7 +86,8 @@
 			padding: 15px;
 			border-radius: 5px;
 			max-width: 600px;
-			background:#123471;
+			background: #123471;
+			box-shadow: 0 0 100px #01001de6;
 		}
 
 
@@ -189,9 +204,8 @@
 			transform: scale(1);
 		}
 
-		#advanced_setting_btn
-		{
-			color:white;
+		#advanced_setting_btn {
+			color: white;
 		}
 
 
@@ -204,14 +218,13 @@
 		}
 
 		.modal-card-head {
-			background-color: #242424;
+
 			text-align: center;
-			background:#002053;
+			background: #002051;
 		}
 
-		.modal-card-body
-		{
-			background-color: #002868;
+		.modal-card-body {
+			background-color: #123471;
 		}
 
 		#select_token_modal .panel-icon {
@@ -262,9 +275,8 @@
 
 		}
 
-		#advanced_setting input
-		{
-			text-align:center;
+		#advanced_setting input {
+			text-align: center;
 		}
 
 
@@ -278,14 +290,15 @@
 		}
 
 
-		#advanced_setting .column
-		{
-			background:transparent;
+		#advanced_setting .column {
+			background: transparent;
 		}
 
-		.content table td, .content table th, .table td, .table th
-		{
-			border-color:#efefef;
+		.content table td,
+		.content table th,
+		.table td,
+		.table th {
+			border-color: #efefef;
 		}
 
 
@@ -310,27 +323,28 @@
 		}
 
 		@media only screen and (max-width: 1024px) {
-			
-				.navbar-start {
-					display:flex;
-					justify-content: center;
-					margin-right: auto;
-				}
-				.navbar-brand
-				{
-					justify-content: center;
-					margin-bottom:10px;
-				}
-				#centered_logo
-				{
-					display:none;
-				}
+
+			.navbar-start {
+				display: flex;
+				justify-content: center;
+				margin-right: auto;
 			}
+
+			.navbar-brand {
+				justify-content: center;
+				margin-bottom: 10px;
+			}
+
+			#centered_logo {
+				display: none;
+			}
+		}
 	</style>
 </head>
 
 <body>
-	
+	<!-- Shadow and Background -->
+	<div class="shadow_bottom"></div>
 
 	<nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
 
@@ -364,7 +378,7 @@
 			<div id="navbarBasicExample" class="navbar-menu">
 
 
-				
+
 
 				<div class="navbar-end">
 					<div class="navbar-item">
@@ -514,7 +528,7 @@
 		<div class="modal-background" onclick="javascript:close_select_token_modal()"></div>
 		<div class="modal-card">
 			<header class="modal-card-head"">
-				<p class="modal-card-title">Select Token</p>
+				<p class=" modal-card-title">Select Token</p>
 				<button class="delete" aria-label="close" onclick="javascript:close_select_token_modal()"></button>
 			</header>
 			<section class="modal-card-body">
@@ -609,7 +623,7 @@
 					</div>
 				</a>
 
-				
+
 
 			</section>
 
@@ -657,7 +671,7 @@
 				$('#advanced_setting_btn span').addClass('fa-angle-up').removeClass('fa-angle-down');
 				$('#advanced_setting').hide().slideDown('fast');
 			}
-			else{
+			else {
 				$('#advanced_setting_btn span').addClass('fa-angle-down').removeClass('fa-angle-up');
 				$('#advanced_setting').slideUp('fast');
 			}
